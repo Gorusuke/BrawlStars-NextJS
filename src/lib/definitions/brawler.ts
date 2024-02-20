@@ -51,3 +51,8 @@ export interface AllClasses {
 }
 
 export type AllTypes = AllClasses | AllRarity
+export interface PowersInterface {
+  power: StarPower;
+  className?: string;
+  tooltip?: boolean;
+}

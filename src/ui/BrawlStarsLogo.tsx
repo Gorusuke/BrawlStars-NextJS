@@ -2,8 +2,8 @@ import Link from 'next/link'
 
 const BrawlStarsLogo = () => {
   return (
-    <Link href='/brawlers' className=''>
-      <div className='svg-container'>
+    <Link href='/brawlers' className='flex items-center text-white cursor-pointer'>
+      <div style={{width: '50px', height: '50px', marginRight: '10px'}}>
         <svg viewBox="0 0 114 114" xmlns="http://www.w3.org/2000/svg">
           <g>
             <path d="m57 0a4 4 0 0 0 -2.81 1.15l-18.76 18.5-25.4 7a4 4 0 0 0 -2.81 4.86l6.65 25.49-6.64 25.49a4 4 0 0 0 2.77 4.87l25.4 7 18.76 18.49a4 4 0 0 0 5.62 0l18.79-18.5 25.4-7a4 4 0 0 0 2.81-4.86l-6.65-25.49 6.64-25.49a4 4 0 0 0 -2.77-4.87l-25.4-7-18.79-18.49a4 4 0 0 0 -2.81-1.15z" />
@@ -36,7 +36,7 @@ const BrawlStarsLogo = () => {
           />
         </svg>
       </div>
-      <h1>Brawl Stars</h1>
+      <h1 className='font-bold text-2xl hover:text-[#ffe058]'>Brawl Stars</h1>
     </Link>
   )
 }
