@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/brawler-bs/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn-fankit.brawlify.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };
