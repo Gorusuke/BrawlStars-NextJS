@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"]});
 export const metadata: Metadata = {
   title: "Brawlers",
   description: "All brawlers from BrawlStars",
+  icons: {
+    icon: '/brawlStarsLoading.svg'
+  }
 };
 
 export default function RootLayout({
