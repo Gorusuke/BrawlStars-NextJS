@@ -1,5 +1,6 @@
 import { PowersInterface } from "@/lib/definitions/brawler"
 import Image from "next/image"
+import Tooltip from "./Tooltip"
 
 const Powers = ({ power, tooltip }: PowersInterface) => {
   return (
@@ -13,14 +14,14 @@ const Powers = ({ power, tooltip }: PowersInterface) => {
         /> 
       }
       {tooltip &&
-        <Image
-          width={48}
-          height={50}
-          src={power.imageUrl}
-          alt={power.name}
-        />
-        // <Tooltip title={power.name} description={power.description}>
-        // </Tooltip>
+        <Tooltip title={power.name} description={power.description}>
+          <Image
+            width={48}
+            height={50}
+            src={power.imageUrl}
+            alt={power.name}
+          />
+        </Tooltip>
       }
     </>
   )
