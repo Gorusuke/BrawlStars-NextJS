@@ -1,4 +1,5 @@
 import { FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV } from "./constants"
+import { BrawlerInterface } from "./definitions/brawler"
 
 export const cutText = (text: string) => {
   if (text.length > 150) {
@@ -19,4 +20,11 @@ export const linkRouter = (step: string, newId: string) => {
     return `/brawler/${Number(newId) + 1}`
   }
   return ''
+}
+
+export const filterBrawlers = (data: BrawlerInterface[], text: string) => {
+  if (text.length) {
+    return data.filter(brawl => brawl.name.toLowerCase().includes(text.toLowerCase()))
+  }
+  return data
 }
