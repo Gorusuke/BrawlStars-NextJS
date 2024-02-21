@@ -1,5 +1,5 @@
-import { FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV } from "./constants"
-import { BrawlerInterface } from "./definitions/brawler"
+import { CLASS, FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
+import { AllClasses, AllRarity, BrawlerInterface } from "./definitions/brawler"
 
 export const cutText = (text: string) => {
   if (text.length > 150) {
@@ -27,4 +27,30 @@ export const filterBrawlers = (data: BrawlerInterface[], text: string) => {
     return data.filter(brawl => brawl.name.toLowerCase().includes(text.toLowerCase()))
   }
   return data
+}
+
+export const filterByType = (data: BrawlerInterface[], text: string | undefined) => {
+  const allRarity: AllRarity = {
+    'Common':  [],
+    'Rare': [],
+    'Super Rare': [],
+    'Epic':  [],
+    'Mythic': [],
+    'Legendary': []
+  }
+  const allClasses: AllClasses = {
+    'Damage Dealer':  [],
+    'Tank':  [],
+    'Marksman':  [],
+    'Artillery':  [],
+    'Controller':  [],
+    'Assassin':  [],
+    'Support':  [],
+  }
+  data.forEach(brawl => {
+    allRarity[brawl.rarity.name as keyof AllRarity].push(brawl)
+    allClasses[brawl.class.name as keyof AllClasses].push(brawl)
+  })
+  if (text === RARITY) return allRarity
+  if (text === CLASS) return allClasses
 }

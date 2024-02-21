@@ -1,0 +1,129 @@
+.filterContainer {
+  margin: 0 auto;
+  max-width: 1280px;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+}
+
+.search {
+  display: flex;
+  position: relative;
+}
+
+.input {
+  width: 300px;
+  padding: 5px 15px;
+  border-radius: 50px;
+  border: none;
+  background: #242424;
+  border: 1px solid #fff;
+
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  width: 20px;
+  color: #000 !important;
+}
+
+.sort {
+  position: relative;
+}
+
+.sortList {
+  list-style: none;
+  position: absolute;
+  border-radius: 0 0 5px 5px;
+  background-color: #fff;
+  border: 1px solid #000;
+  right: 0;
+  top: 30px;
+}
+
+.sortElement {
+  color: #000;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  padding: 3px 0;
+  text-align: center;
+  width: 110px;
+}
+
+.sortElement:hover {
+  background-color: #242424;
+  color: #ffe058;
+}
+
+.brawlContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto, 100px));
+  gap: 10px;
+  padding: 20px 0;
+}
+
+.brawlTitle {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.container {
+  padding: 20px 0;
+}
+
+.tooltip {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  cursor: pointer;
+
+}
+
+.tooltipContent {
+  width: max-content;
+  position: absolute;
+  font-size: 14px;
+  background: black;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+}
+
+.tooltip .tooltipContent::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: rgb(0, 0, 0);
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip:hover .tooltipContent {
+  opacity: 1;
+  display: inline;
+  pointer-events: auto;
+  min-width: min-content;
+  max-width: 300px;
+  z-index: 11;
+}
+
+.span {
+  display: block;
+}
