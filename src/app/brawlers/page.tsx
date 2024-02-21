@@ -4,24 +4,27 @@ import Powers from '@/ui/Powers'
 import { getAllBrawlers } from '@/lib/data'
 import Filters from '@/ui/client/Filter'
 import { filterBrawlers } from '@/lib/utils'
+import { ALL } from '@/lib/constants'
+import BrawlersByType from '@/ui/BrawlerByType'
 
 const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string | undefined }}) => {
-  const { query } = searchParams 
+  const { query, filterBy = ALL } = searchParams 
   const allBrawlers = await getAllBrawlers()
   const brawlersData = filterBrawlers(allBrawlers, (query ?? ''))
+  const showAll = filterBy === ALL
 
   return (
     <>
       <Filters />
       <h1 className='text-center text-4xl font-bold mb-10 my-7'>Brawlers</h1>
-      <section className='grid grid-cols-[repeat(auto-fit,_minmax(380px,_1fr))] gap-5 pb-20'>
-        {/* {filterBy !== ALL && <BrawlerByType brawlers={brawlers} selection={filterBy} />} */}
-        {/* {filterBy === ALL && filterBrawlers(brawlerPagination, text).map(brawler => { */}
-        {brawlersData.map(brawler => {
+      <section className={`${showAll ? 'grid grid-cols-[repeat(auto-fit,_minmax(380px,_1fr))] gap-5 pb-20' : ''}`}>
+        {!showAll && <BrawlersByType brawlers={allBrawlers} filterBy={filterBy}/>}
+        {showAll && !brawlersData.length && <p className=' text-center text-3xl my-10'>Busca bien careverga</p> }
+        {showAll && brawlersData.map(brawler => {
           const powersAndGadgets = [...brawler.starPowers, ...brawler.gadgets]
           return (
             <div
-              className="cursor-pointer rounded-xl"
+              className="cursor-pointer rounded-xl hover:scale-105 transition-all"
               style={{border: `4px solid ${brawler.rarity.color}`}}
               key={brawler.id}
             >

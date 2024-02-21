@@ -4,7 +4,7 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { CLASS, RARITY, ALL } from "@/lib/constants";
 import ArrowButtons from "../ArrowButtons";
-import styles from './filter.module.css'
+import styles from '../global.module.css'
 
 const Filters = () => {
   const { replace } = useRouter()
