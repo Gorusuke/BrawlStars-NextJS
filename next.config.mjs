@@ -6,7 +6,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn-old.brawlify.com',
         port: '',
-        pathname: '/brawler-bs/**',
+        pathname: '/**',
       },
       {
         protocol: 'https',
