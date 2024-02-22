@@ -127,3 +127,20 @@
 .span {
   display: block;
 }
+
+.topBrawlers {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+
+}
+
+.topBrawlersImage {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 6px double #fff;
+}

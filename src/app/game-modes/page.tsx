@@ -15,8 +15,8 @@ const GameModes = async () => {
             <div className='flex justify-between py-0 px-1 h-12' style={{ backgroundColor: gameMode.bgColor }}>
               <div className="flex gap-3 items-center">
                 <Image
-                  height={35}
-                  width={35} 
+                  height={32}
+                  width={32} 
                   className='object-contain' 
                   src={gameMode.imageUrl} 
                   alt={gameMode.name} 
