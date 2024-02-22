@@ -5,7 +5,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { CLASS, RARITY, ALL } from "@/lib/constants";
 import ArrowButtons from "../ArrowButtons";
 import styles from '../global.module.css'
-import search from './search.svg'
 
 const Filters = () => {
   const { replace } = useRouter()
@@ -53,7 +52,7 @@ const Filters = () => {
               type="text"
               defaultValue={searchParams.get('query')?.toString()}
             />
-            <Image className={styles.icon} src={search} alt="search" width={20} height={0} />
+            <Image className={styles.icon} src='/search.svg' alt="search" width={20} height={0} />
           </>
         }
       </div>
