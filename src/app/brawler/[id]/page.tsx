@@ -1,30 +1,21 @@
-import { NEXT, PREV } from "@/lib/constants"
+import { BUTTONS_ARR } from "@/lib/constants"
 import { getBrawlerById } from "@/lib/data"
 import { cutText, linkRouter } from "@/lib/utils"
 import ArrowButtons from "@/ui/ArrowButtons"
 import Powers from "@/ui/Powers"
-import { Metadata } from "next"
+import { Metadata, ResolvingMetadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-
-const buttonsArr = [
-  {
-    text: "Prev Brawler",
-    path: "M21 12L3 12M3 12L11.5 3.5M3 12L11.5 20.5",
-    isUp: false,
-    step: PREV
-  },
-  {
-    text: "Next Brawler",
-    path: "M3 12L21 12M21 12L12.5 3.5M21 12L12.5 20.5",
-    isUp: true,
-    step: NEXT
+ 
+export async function generateMetadata({ params }: {params: { id: string }}): Promise<Metadata> {
+  const { id } = params
+  const brawler = await getBrawlerById(id)
+ 
+  return {
+    title: `Brawler - ${brawler.name}`,
+    description: cutText(brawler.description)
   }
-]
-
-export const metadata: Metadata = {
-  title: `Brawler - ${'sdad'}`,
-};
+}
 
 const Brawler = async ({ params }: { params: { id: string }}) => {
   const { id } = params
@@ -35,7 +26,7 @@ const Brawler = async ({ params }: { params: { id: string }}) => {
       {Boolean(Object.values(brawler).length) &&
         <div className="grid p-4 min-h-[55vh] place-content-center">
           <div className="flex justify-between mb-5">
-            {buttonsArr.map(button => 
+            {BUTTONS_ARR.map(button => 
               <Link href={linkRouter(button.step, id)} key={button.text}>
                 <ArrowButtons text={button.text} path={button.path} isUp={button.isUp} />
               </Link>

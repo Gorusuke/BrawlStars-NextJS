@@ -1,8 +1,14 @@
 import { getAllMaps } from "@/lib/data"
 import { MapsNamesInterface } from "@/lib/definitions/maps"
 import { groupByMapsTitle } from "@/lib/utils"
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: 'Maps',
+  description: "All maps from Brawl Stars",
+};
 
 const Maps = async () => {
   const allMaps = await getAllMaps()

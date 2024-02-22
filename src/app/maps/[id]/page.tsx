@@ -1,14 +1,23 @@
 import { getMap } from "@/lib/data"
 import BrawlStats from "@/ui/BrawlStats"
 import Tooltip from "@/ui/Tooltip"
+import { Metadata } from "next";
 import Image from "next/image"
+
+export async function generateMetadata({ params }: {params: { id: string }}): Promise<Metadata> {
+  const { id } = params
+  const map = await getMap(id)
+ 
+  return {
+    title: `Map - ${map.name}`,
+    description: map.gameMode.description
+  }
+}
 
 const Map = async ({params}: { params: { id: string }}) => {
   const { id } = params
   const map = await getMap(id)
   console.log(map)
-
-  // return 'map'
 
   return (
     <>
