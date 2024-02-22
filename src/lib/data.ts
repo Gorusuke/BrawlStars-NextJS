@@ -17,3 +17,9 @@ export const getAllGameModes = async () => {
   const response = await fetch(`${URL}/gamemodes`)
   return await response.json()
 }
+
+export const getAllMaps = async () => {
+  const response = await fetch(`${URL}/maps`)
+  const { list } = await response.json()
+  return list
+}

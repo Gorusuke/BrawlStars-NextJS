@@ -1,5 +1,6 @@
 import { CLASS, FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
 import { AllClasses, AllRarity, BrawlerInterface } from "./definitions/brawler"
+import { Maps, MapsNamesInterface } from "./definitions/maps"
 
 export const cutText = (text: string) => {
   if (text.length > 150) {
@@ -53,4 +54,39 @@ export const filterByType = (data: BrawlerInterface[], text: string | undefined)
   })
   if (text === RARITY) return allRarity
   if (text === CLASS) return allClasses
+}
+
+export const groupByMapsTitle = (data: Maps[]) => {
+  const mapsName: MapsNamesInterface = {
+    'Basket Brawl': [],
+    'Big Game': [],
+    'Boss Fight': [],
+    'Bot Drop': [],
+    'Bounty': [],
+    'Brawl Ball': [],
+    'Duels': [],
+    'Duo Showdown': [],
+    'Gem Grab': [],
+    'Heist': [],
+    'Hold The Trophy': [],
+    'Hot Zone': [],
+    'Hunters': [],
+    'Knockout': [],
+    'Last Stand': [],
+    'Lone Star': [],
+    'Payload': [],
+    'Pumpkin Plunder': [],
+    'Robo Rumble': [],
+    'Siege': [],
+    'Solo Showdown': [],
+    'Super City Rampage': [],
+    'Takedown': [],
+    'Volley Brawl': [],
+    'Wipeout': [],
+  }
+  const dataSorted = [...data].sort((a: Maps, b: Maps) => a.gameMode.name > b.gameMode.name ? 1 : -1)
+  dataSorted.forEach(map => {
+    mapsName[map.gameMode.name as keyof MapsNamesInterface].push(map)
+  })
+  return mapsName
 }
