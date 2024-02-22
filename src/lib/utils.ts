@@ -98,3 +98,11 @@ export const statsBrawlers = async (stats: Stat[], highValue: number) => {
   const newStats = brawlersByStats.map(x => ({ image: x.imageUrl3, name: x.name, brawlerId: x.id }))
   return newStats
 }
+
+export const getDate = (eventDate: string, now: string) => {
+  const date1 = new Date(now)
+  const date2 = new Date(eventDate)
+  const diff = ((date2.getTime() - date1.getTime()) / 1000) / 60
+  const result = Math.abs(Math.round(diff))
+  return (result / 60).toString().split('.');
+}

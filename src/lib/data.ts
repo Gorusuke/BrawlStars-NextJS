@@ -43,3 +43,25 @@ export const getMap = async (id: string) => {
     }
   }
 }
+
+export const getAllEvents = async () => {
+  const response = await fetch(`${URL}/events`)
+  const allEvents = await response.json()
+  const eventsType = {
+    active: [],
+    upcoming: []
+  }
+  for (let idx = 0; idx < Object.keys(allEvents).length; idx++) {
+    const type = Object.keys(allEvents)[idx];
+    const typeArr = allEvents[type]
+    for (const act of typeArr) {
+      const stats = await statsBrawlers(act.map.stats, 3)
+      // @ts-expect-error next-line
+      eventsType[type as keyof typeof eventsType].push({ ...act, map: { ...act.map, stats }})
+    }
+  }
+  return {
+    active: eventsType.active,
+    upcoming: eventsType.upcoming
+  }
+}
