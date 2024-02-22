@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { CLASS, RARITY, ALL } from "@/lib/constants";
 import ArrowButtons from "../ArrowButtons";
 import styles from '../global.module.css'
-import search from '../../../public/search.svg'
+import search from './search.svg'
 
 const Filters = () => {
   const { replace } = useRouter()
