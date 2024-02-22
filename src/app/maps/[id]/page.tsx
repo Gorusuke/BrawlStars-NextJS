@@ -17,7 +17,6 @@ export async function generateMetadata({ params }: {params: { id: string }}): Pr
 const Map = async ({params}: { params: { id: string }}) => {
   const { id } = params
   const map = await getMap(id)
-  console.log(map)
 
   return (
     <>

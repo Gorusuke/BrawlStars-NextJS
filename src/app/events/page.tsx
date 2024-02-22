@@ -1,5 +1,11 @@
 import { getAllEvents } from "@/lib/data"
 import EventCards from "@/ui/EventCards"
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Events',
+  description: "All events from Brawl Stars",
+};
 
 const Events = async () => {
   const brawlEvents = await getAllEvents()

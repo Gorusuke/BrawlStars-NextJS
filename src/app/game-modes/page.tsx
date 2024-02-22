@@ -1,7 +1,13 @@
 import { getAllGameModes } from "@/lib/data"
 import { GameModesInterface } from "@/lib/definitions/gameModes"
 import Tooltip from "@/ui/Tooltip"
+import { Metadata } from "next";
 import Image from "next/image"
+
+export const metadata: Metadata = {
+  title: 'Game-Modes',
+  description: "All game-modes from Brawl Stars",
+};
 
 const GameModes = async () => {
   const { list }: GameModesInterface = await getAllGameModes()
