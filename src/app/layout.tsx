@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Brawlers",
   description: "All brawlers from BrawlStars",
   icons: {
-    icon: '/brawlStarsLoading.svg'
+    icon: '/brawlstarsLoading.svg'
   }
 };
 
