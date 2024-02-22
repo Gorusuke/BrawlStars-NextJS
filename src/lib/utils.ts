@@ -1,6 +1,7 @@
 import { CLASS, FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
+import { getAllBrawlers } from "./data"
 import { AllClasses, AllRarity, BrawlerInterface } from "./definitions/brawler"
-import { Maps, MapsNamesInterface } from "./definitions/maps"
+import { Maps, MapsNamesInterface, Stat } from "./definitions/maps"
 
 export const cutText = (text: string) => {
   if (text.length > 150) {
@@ -89,4 +90,11 @@ export const groupByMapsTitle = (data: Maps[]) => {
     mapsName[map.gameMode.name as keyof MapsNamesInterface].push(map)
   })
   return mapsName
+}
+
+export const statsBrawlers = async (stats: Stat[], highValue: number) => {
+  const allBrawlers = await getAllBrawlers()
+  const brawlersByStats = allBrawlers.filter(brawl => stats.slice(0, highValue).some((stat: Stat) => stat.brawler === brawl.id))
+  const newStats = brawlersByStats.map(x => ({ image: x.imageUrl3, name: x.name, brawlerId: x.id }))
+  return newStats
 }
