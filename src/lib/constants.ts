@@ -5,7 +5,7 @@ export const ALL = 'All'
 export const PREV = 'prev'
 export const NEXT = 'next'
 export const FIRST_BRAWLER_ID = '16000000'
-export const LAST_BRAWLER_ID = '16000077'
+export const LAST_BRAWLER_ID = '16000079'
 export const UPCOMING = 'upcoming'
 export const BUTTONS_ARR = [
   {
