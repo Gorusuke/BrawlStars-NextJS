@@ -5,6 +5,7 @@ import { UPCOMING } from "@/lib/constants"
 import { getDate } from "@/lib/utils"
 import { Active, Upcoming } from "@/lib/definitions/events"
 import Image from "next/image"
+import styles from '@/ui/global.module.css'
 
 const EventCards = ({ event, title }: {event: Active[] | Upcoming[], title: string}) => {
   const isUpcoming = title.toLowerCase() === UPCOMING
@@ -47,7 +48,7 @@ const EventCards = ({ event, title }: {event: Active[] | Upcoming[], title: stri
                 />
                 <div className='flex gap-4 px-2 py-1 items-center font-semibold mt-[-7px] h-14' style={{ backgroundColor: brawlEvent.map.gameMode.bgColor }}>
                   <Image 
-                    className='h-auto w-10 object-contain' 
+                    className={styles.eventImage} 
                     height={0}
                     width={0}
                     sizes="100vw"
