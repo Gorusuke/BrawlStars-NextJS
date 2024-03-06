@@ -4,7 +4,6 @@ import { GameModesInterface } from "./definitions/gameModes"
 import { statsBrawlers } from "./utils"
 
 export const getAllBrawlers = async () => {
-  // const a = await new Promise(resolve => setTimeout(resolve, 100000)) // quitar esto
   const response = await fetch(`${URL}/brawlers`)
   const { list } = await response.json()
   const listSorted = [...list].sort((a: BrawlerInterface, b: BrawlerInterface) => a.id - b.id)

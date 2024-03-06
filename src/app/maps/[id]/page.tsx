@@ -75,10 +75,12 @@ const Map = async ({params}: { params: { id: string }}) => {
                 <span className='block mt-1'>{map.gameMode.description}</span>
               </div>
             </div>
-            <div>
-              <h3>Top 12 best brawlers for this map</h3>
-              <BrawlStats stats={map.stats} />
-            </div>
+            {Boolean(map.stats.length) &&
+              <div>
+                <h3>Top {map.stats.length} best brawlers for this map</h3>
+                <BrawlStats stats={map.stats} />
+              </div>
+            }
           </div>
         </section>
       }
