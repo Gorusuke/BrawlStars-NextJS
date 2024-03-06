@@ -18,13 +18,46 @@ export const CardSkeleton = () => {
   )
 }
 
-
 export const MapsSkeleton = () => {
   return (
     <section className={styles.skeletonMap}>
       <h2 className={styles.skeletonTitle}/>
       <div className={styles.skeletonMapContainer}>
         {[...Array(12)].map((_, idx) => <div key={idx} className={`${styles.skeletonImage} ${styles.skeleton}`}/>)}
+      </div>
+    </section>
+  )
+}
+
+export const EventsSkeleton = () => {
+  return (
+    <section className={styles.skeletonEvent}>
+      <h2 className={styles.skeletonTitle}/>
+      <div className={styles.skeletonEventContainer}>
+        {[...Array(6)].map((_, idx) => (
+          <div key={idx} className={styles.skeleton} style={{backgroundColor: '#f3f4f6'}}>
+            <>
+              <div className={styles.skeletonEventTop}>
+                <span className={styles.skeletonEventTitle}/>
+                <div className={styles.skeletonEventImage}/>
+              </div>
+              <div className={styles.skeletonEventBanner}/>
+              <div className={styles.skeletonEventMapContainer}>
+                <div className={styles.skeletonPowers}/>
+                <div className={styles.skeletonEventMapName}>
+                  <h3 className={styles.skeletonEventTitle}/>
+                  <div className={styles.skeletonEventTitle} />
+                </div>
+              </div>
+            </>
+            <div className={styles.skeletonEventBottom}>
+              <div className={styles.skeletonEventBottomImage}>
+                {[...Array(3)].map((_, idx) => <div className={styles.skeletonPowers} key={idx}/>)}
+              </div>
+              <span className={styles.skeletonTitle}/>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )
