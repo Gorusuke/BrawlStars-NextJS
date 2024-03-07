@@ -62,3 +62,18 @@ export const EventsSkeleton = () => {
     </section>
   )
 }
+
+export const GameModeSkeleton = () => {
+  return (
+    <div className={`${styles.skeletonGameModeContainer} ${styles.skeleton}`}>
+      <div className={styles.skeletonGameModeTop}>
+        <div className={styles.skeletonGameModeTitle}>
+          <div className={styles.skeletonPowers} />
+          <h3 className={styles.skeletonTitle}/>
+        </div>
+        <div className={styles.skeletonEventImage}/>
+      </div>
+      <div className={styles.skeletonGameModeBanner} />
+    </div>
+  )
+}
