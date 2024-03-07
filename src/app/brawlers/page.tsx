@@ -19,7 +19,7 @@ const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string |
       <h1 className='text-center text-4xl font-bold mb-10 my-7'>Brawlers</h1>
       <section className={`${showAll ? 'grid grid-cols-[repeat(auto-fit,_minmax(380px,_1fr))] gap-5 pb-20' : ''}`}>
         {!showAll && <BrawlersByType brawlers={allBrawlers} filterBy={filterBy}/>}
-        {showAll && !brawlersData.length && <p className=' text-center text-3xl my-10'>Busca bien careverga</p> }
+        {showAll && !brawlersData.length && <p className=' text-center text-3xl my-10'>This brawler <b>{query}</b> doesn&#39;t exist </p> }
         {showAll && brawlersData.map(brawler => {
           const powersAndGadgets = [...brawler.starPowers, ...brawler.gadgets]
           return (
