@@ -163,6 +163,29 @@
   background-color: #f3f4f6;
 }
 
+.paginationButton,
+.arrowButton {
+  height: 40px;
+  width: 40px;
+  border: 1px solid white;
+  outline: none;
+}
+
+.arrowButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.arrowButton:hover {
+  border: 1px solid #ffe058;
+}
+
+.outline {
+  outline: none;
+}
+
 .skeletonImage {
   height: 176px;
   width: 176px;
