@@ -4,20 +4,39 @@ import Powers from '@/ui/Powers'
 import { getAllBrawlers } from '@/lib/data'
 import Filters from '@/ui/client/Filter'
 import { filterBrawlers, getPagination } from '@/lib/utils'
-import { ALL, CARD_PER_PAGE, LEFT_ARROW, RIGHT_ARROW } from '@/lib/constants'
+import { ALL, CARDS_PER_PAGE, LEFT_ARROW, NEXT, PREV, RIGHT_ARROW } from '@/lib/constants'
 import BrawlersByType from '@/ui/BrawlerByType'
 import ArrowButtons from '@/ui/ArrowButtons'
 import Pagination from '@/ui/client/Pagination'
 import styles from '@/ui/global.module.css'
+import { headers } from 'next/headers'
 
 const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string | undefined }}) => {
-  const { page = 1, query, filterBy = ALL } = searchParams 
+  const { page = 1, query, filterBy = ALL } = searchParams
   const allBrawlers = await getAllBrawlers()
   const brawlersData = filterBrawlers(allBrawlers, (query ?? ''))
   const showAll = filterBy === ALL
-  const totalPages = Math.ceil(brawlersData.length / CARD_PER_PAGE)
-  const {prev, next} = getPagination(0, CARD_PER_PAGE * Number(page))
+  const {prev, next} = getPagination(0, CARDS_PER_PAGE * Number(page))
   const brawlersPagination = brawlersData.slice(prev, next)
+  const totalPages = Math.ceil((Number(query) || brawlersData.length) / CARDS_PER_PAGE)
+  
+  const createPageURL = (state: string) => {
+    const headersList = headers()
+    const header_url = headersList.get('x-url') || "";
+    const pathname = headersList.get('x-pathname');
+    const params = header_url.split('?')[1] || ''
+    const getParams = params.includes('&') ? params.split('&') : [params]
+    const hoal = getParams.find(pa => pa.includes('page'))
+    const pageNumber = Number(hoal?.at(-1))
+    let newUrl = ''
+    if(state === NEXT){
+      newUrl = params.replace(`page=${pageNumber}`, `page=${pageNumber + 1}`)
+    } else {
+      newUrl = params.replace(`page=${pageNumber}`, `page=${pageNumber - 1}`)
+    }
+    return `${pathname}?${newUrl}`
+  };
+  
 
   return (
     <>
@@ -58,15 +77,15 @@ const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string |
           )
         })}
       </section>
-      {Boolean(brawlersPagination.length) &&
+      {Boolean(brawlersData.length) && filterBy === ALL &&
         <div className='flex justify-center items-center mb-12'>
-          <Link scroll={false} href={`/brawlers?page=${Number(page) - 1}`} className={Number(page) <= 1 ? '' : styles.arrowButton}>
+          <Link scroll={false} href={createPageURL(PREV)} className={Number(page) <= 1 ? '' : styles.arrowButton}>
             <ArrowButtons text='' path={LEFT_ARROW} isUp={false} disabled={Number(page) <= 1} />
           </Link>
           <div style={{margin: '0 20px'}}>
             <Pagination totalPages={totalPages}/>
           </div>
-          <Link scroll={false} href={`/brawlers?page=${Number(page) + 1}`} className={(Number(page) >= totalPages) ? '' : styles.arrowButton}>
+          <Link scroll={false} href={createPageURL(NEXT)} className={(Number(page) >= totalPages) ? '' : styles.arrowButton}>
             <ArrowButtons text='' path={RIGHT_ARROW} isUp={false} disabled={Number(page) >= totalPages}/>
           </Link>
         </div>
