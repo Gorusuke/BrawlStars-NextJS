@@ -88,8 +88,11 @@ export const groupByMapsTitle = (data: Maps[]) => {
   }
   const dataSorted = [...data].sort((a: Maps, b: Maps) => a.gameMode.name > b.gameMode.name ? 1 : -1)
   dataSorted.forEach(map => {
-    mapsName[map.gameMode.name as keyof MapsNamesInterface].push(map)
+    if(Boolean(mapsName[map.gameMode.name as keyof MapsNamesInterface])) {
+      mapsName[map.gameMode.name as keyof MapsNamesInterface].push(map)
+    }
   })
+  console.log(mapsName)
   return mapsName
 }
 
