@@ -1,11 +1,14 @@
+import styles from '@/ui/global.module.css'
+
 const ArrowButtons = (
-  { text, path, isUp, onClick }: 
-  { text:string, path:string, isUp: boolean, onClick?: () => void }
+  { text, path, isUp, onClick, disabled }: 
+  { text:string, path:string, isUp: boolean, onClick?: () => void, disabled?: boolean }
 ) => {
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
-      className="flex items-center gap-2 py-3 text-base bg-transparent cursor-pointer hover:text-[#ffe058]"
+      className={`${styles.outline} flex items-center gap-2 py-3 text-base bg-transparent ${!disabled && 'cursor-pointer hover:text-[#ffe058]'}`}
     >
       {isUp && text}
       <svg 
@@ -15,7 +18,7 @@ const ArrowButtons = (
         strokeWidth="1.5" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg" 
-        color="currentColor"
+        color={`${!disabled ? "currentColor" : 'gray'}`}
       >
         <path d={path} 
           stroke="currentColor" 

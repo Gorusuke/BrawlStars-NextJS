@@ -4,14 +4,18 @@ import Powers from '@/ui/Powers'
 import { getAllBrawlers } from '@/lib/data'
 import Filters from '@/ui/client/Filter'
 import { filterBrawlers } from '@/lib/utils'
-import { ALL } from '@/lib/constants'
+import { ALL, LEFT_ARROW, RIGHT_ARROW } from '@/lib/constants'
 import BrawlersByType from '@/ui/BrawlerByType'
+import ArrowButtons from '@/ui/ArrowButtons'
+import Pagination from '@/ui/client/Pagination'
+import styles from '@/ui/global.module.css'
 
 const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string | undefined }}) => {
-  const { query, filterBy = ALL } = searchParams 
+  const { page = 1, query, filterBy = ALL } = searchParams 
   const allBrawlers = await getAllBrawlers()
   const brawlersData = filterBrawlers(allBrawlers, (query ?? ''))
   const showAll = filterBy === ALL
+  const totalPages = Math.ceil(brawlersData.length / 12)
 
   return (
     <>
@@ -52,6 +56,17 @@ const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string |
           )
         })}
       </section>
+      <div className='flex justify-center items-center mb-20'>
+        <Link href={`/brawlers?page=${Number(page) - 1}`} className={Number(page) <= 1 ? '' : styles.arrowButton}>
+          <ArrowButtons text='' path={LEFT_ARROW} isUp={false} disabled={Number(page) <= 1} />
+        </Link>
+        <div style={{margin: '0 20px'}}>
+          <Pagination totalPages={totalPages}/>
+        </div>
+        <Link href={`/brawlers?page=${Number(page) + 1}`} className={(Number(page) >= totalPages) ? '' : styles.arrowButton}>
+          <ArrowButtons text='' path={RIGHT_ARROW} isUp={false} disabled={Number(page) >= totalPages}/>
+        </Link>
+      </div>
     </>
   )
 }
