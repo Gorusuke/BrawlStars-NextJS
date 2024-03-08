@@ -1,3 +1,4 @@
+import { CARD_PER_PAGE } from '@/lib/constants'
 import styles from './global.module.css'
 
 export const CardSkeleton = () => {
@@ -23,7 +24,7 @@ export const MapsSkeleton = () => {
     <section className={styles.skeletonMap}>
       <h2 className={styles.skeletonTitle}/>
       <div className={styles.skeletonMapContainer}>
-        {[...Array(12)].map((_, idx) => <div key={idx} className={`${styles.skeletonImage} ${styles.skeleton}`}/>)}
+        {[...Array(CARD_PER_PAGE)].map((_, idx) => <div key={idx} className={`${styles.skeletonImage} ${styles.skeleton}`}/>)}
       </div>
     </section>
   )

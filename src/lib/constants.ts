@@ -7,6 +7,7 @@ export const NEXT = 'next'
 export const FIRST_BRAWLER_ID = '16000000'
 export const LAST_BRAWLER_ID = '16000079'
 export const UPCOMING = 'upcoming'
+export const CARD_PER_PAGE = 12
 export const LEFT_ARROW = "M21 12L3 12M3 12L11.5 3.5M3 12L11.5 20.5"
 export const RIGHT_ARROW = "M3 12L21 12M21 12L12.5 3.5M21 12L12.5 20.5"
 export const BUTTONS_ARR = [

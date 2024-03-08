@@ -1,4 +1,4 @@
-import { URL } from "./constants"
+import { CARD_PER_PAGE, URL } from "./constants"
 import { BrawlerInterface } from "./definitions/brawler"
 import { GameModesInterface } from "./definitions/gameModes"
 import { statsBrawlers } from "./utils"
@@ -32,7 +32,7 @@ export const getMap = async (id: string) => {
   const allGameModes = await getAllGameModes()
   const { list }: GameModesInterface = allGameModes
   const gameMode = list.find(game => game.name === map.gameMode.name)
-  const stats = await statsBrawlers(map.stats, 12)
+  const stats = await statsBrawlers(map.stats, CARD_PER_PAGE)
   return {
     ...map,
     stats,
