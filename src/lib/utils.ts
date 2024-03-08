@@ -1,4 +1,4 @@
-import { CLASS, FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
+import { CARD_PER_PAGE, CLASS, FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
 import { getAllBrawlers } from "./data"
 import { AllClasses, AllRarity, BrawlerInterface } from "./definitions/brawler"
 import { Maps, MapsNamesInterface, Stat } from "./definitions/maps"
@@ -105,4 +105,10 @@ export const getDate = (eventDate: string, now: string) => {
   const diff = ((date2.getTime() - date1.getTime()) / 1000) / 60
   const result = Math.abs(Math.round(diff))
   return (result / 60).toString().split('.');
+}
+
+export const getPagination = (prev: number, next: number) => {
+  prev = next - CARD_PER_PAGE
+  next = prev + CARD_PER_PAGE
+  return {prev, next}
 }

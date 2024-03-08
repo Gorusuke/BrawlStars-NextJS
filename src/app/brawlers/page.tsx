@@ -3,8 +3,8 @@ import Image from 'next/image'
 import Powers from '@/ui/Powers'
 import { getAllBrawlers } from '@/lib/data'
 import Filters from '@/ui/client/Filter'
-import { filterBrawlers } from '@/lib/utils'
-import { ALL, LEFT_ARROW, RIGHT_ARROW } from '@/lib/constants'
+import { filterBrawlers, getPagination } from '@/lib/utils'
+import { ALL, CARD_PER_PAGE, LEFT_ARROW, RIGHT_ARROW } from '@/lib/constants'
 import BrawlersByType from '@/ui/BrawlerByType'
 import ArrowButtons from '@/ui/ArrowButtons'
 import Pagination from '@/ui/client/Pagination'
@@ -15,16 +15,18 @@ const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string |
   const allBrawlers = await getAllBrawlers()
   const brawlersData = filterBrawlers(allBrawlers, (query ?? ''))
   const showAll = filterBy === ALL
-  const totalPages = Math.ceil(brawlersData.length / 12)
+  const totalPages = Math.ceil(brawlersData.length / CARD_PER_PAGE)
+  const {prev, next} = getPagination(0, CARD_PER_PAGE * Number(page))
+  const brawlersPagination = brawlersData.slice(prev, next)
 
   return (
     <>
       <Filters />
       <h1 className='text-center text-4xl font-bold mb-10 my-7'>Brawlers</h1>
-      <section className={`${showAll ? 'grid grid-cols-[repeat(auto-fit,_minmax(380px,_1fr))] gap-5 pb-20' : ''}`}>
+      <section className={`${showAll ? 'grid grid-cols-[repeat(auto-fit,_minmax(380px,_1fr))] gap-5 pb-12' : ''}`}>
         {!showAll && <BrawlersByType brawlers={allBrawlers} filterBy={filterBy}/>}
-        {showAll && !brawlersData.length && <p className=' text-center text-3xl my-10'>This brawler <b>{query}</b> doesn&#39;t exist </p> }
-        {showAll && brawlersData.map(brawler => {
+        {showAll && !brawlersPagination.length && <p className=' text-center text-3xl my-10'>This brawler <b>{query}</b> doesn&#39;t exist </p> }
+        {showAll && brawlersPagination.map(brawler => {
           const powersAndGadgets = [...brawler.starPowers, ...brawler.gadgets]
           return (
             <div
@@ -56,17 +58,19 @@ const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string |
           )
         })}
       </section>
-      <div className='flex justify-center items-center mb-20'>
-        <Link href={`/brawlers?page=${Number(page) - 1}`} className={Number(page) <= 1 ? '' : styles.arrowButton}>
-          <ArrowButtons text='' path={LEFT_ARROW} isUp={false} disabled={Number(page) <= 1} />
-        </Link>
-        <div style={{margin: '0 20px'}}>
-          <Pagination totalPages={totalPages}/>
+      {Boolean(brawlersPagination.length) &&
+        <div className='flex justify-center items-center mb-12'>
+          <Link scroll={false} href={`/brawlers?page=${Number(page) - 1}`} className={Number(page) <= 1 ? '' : styles.arrowButton}>
+            <ArrowButtons text='' path={LEFT_ARROW} isUp={false} disabled={Number(page) <= 1} />
+          </Link>
+          <div style={{margin: '0 20px'}}>
+            <Pagination totalPages={totalPages}/>
+          </div>
+          <Link scroll={false} href={`/brawlers?page=${Number(page) + 1}`} className={(Number(page) >= totalPages) ? '' : styles.arrowButton}>
+            <ArrowButtons text='' path={RIGHT_ARROW} isUp={false} disabled={Number(page) >= totalPages}/>
+          </Link>
         </div>
-        <Link href={`/brawlers?page=${Number(page) + 1}`} className={(Number(page) >= totalPages) ? '' : styles.arrowButton}>
-          <ArrowButtons text='' path={RIGHT_ARROW} isUp={false} disabled={Number(page) >= totalPages}/>
-        </Link>
-      </div>
+      }
     </>
   )
 }
