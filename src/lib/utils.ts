@@ -1,4 +1,4 @@
-import { CARD_PER_PAGE, CLASS, FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
+import { CARDS_PER_PAGE, CLASS, FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
 import { getAllBrawlers } from "./data"
 import { AllClasses, AllRarity, BrawlerInterface } from "./definitions/brawler"
 import { Maps, MapsNamesInterface, Stat } from "./definitions/maps"
@@ -33,21 +33,21 @@ export const filterBrawlers = (data: BrawlerInterface[], text: string) => {
 
 export const filterByType = (data: BrawlerInterface[], text: string | undefined) => {
   const allRarity: AllRarity = {
-    'Common':  [],
+    'Common': [],
     'Rare': [],
     'Super Rare': [],
-    'Epic':  [],
+    'Epic': [],
     'Mythic': [],
     'Legendary': []
   }
   const allClasses: AllClasses = {
-    'Damage Dealer':  [],
-    'Tank':  [],
-    'Marksman':  [],
-    'Artillery':  [],
-    'Controller':  [],
-    'Assassin':  [],
-    'Support':  [],
+    'Damage Dealer': [],
+    'Tank': [],
+    'Marksman': [],
+    'Artillery': [],
+    'Controller': [],
+    'Assassin': [],
+    'Support': [],
   }
   data.forEach(brawl => {
     allRarity[brawl.rarity.name as keyof AllRarity].push(brawl)
@@ -108,7 +108,7 @@ export const getDate = (eventDate: string, now: string) => {
 }
 
 export const getPagination = (prev: number, next: number) => {
-  prev = next - CARD_PER_PAGE
-  next = prev + CARD_PER_PAGE
-  return {prev, next}
+  prev = next - CARDS_PER_PAGE
+  next = prev + CARDS_PER_PAGE
+  return { prev, next }
 }

@@ -18,7 +18,7 @@ const Pagination = ({totalPages}: {totalPages: number}) => {
   const allPages = Array.from({length: totalPages}, (_, idx) => idx + 1)
 
   return allPages.map(page => 
-    <Link href={createPageURL(page)} key={page}>
+    <Link href={createPageURL(page)} key={page} scroll={false}>
       <button className={styles.paginationButton} style={{backgroundColor: page === currentPage ? '#ffe058b3' : 'gray'}}>
         {page}
       </button>

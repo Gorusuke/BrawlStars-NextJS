@@ -1,4 +1,4 @@
-import { CARD_PER_PAGE, URL } from "./constants"
+import { CARDS_PER_PAGE, URL } from "./constants"
 import { BrawlerInterface } from "./definitions/brawler"
 import { GameModesInterface } from "./definitions/gameModes"
 import { statsBrawlers } from "./utils"
@@ -32,7 +32,7 @@ export const getMap = async (id: string) => {
   const allGameModes = await getAllGameModes()
   const { list }: GameModesInterface = allGameModes
   const gameMode = list.find(game => game.name === map.gameMode.name)
-  const stats = await statsBrawlers(map.stats, CARD_PER_PAGE)
+  const stats = await statsBrawlers(map.stats, CARDS_PER_PAGE)
   return {
     ...map,
     stats,
@@ -57,7 +57,7 @@ export const getAllEvents = async () => {
     for (const act of typeArr) {
       const stats = await statsBrawlers(act.map.stats, 3)
       // @ts-expect-error next-line
-      eventsType[type as keyof typeof eventsType].push({ ...act, map: { ...act.map, stats }})
+      eventsType[type as keyof typeof eventsType].push({ ...act, map: { ...act.map, stats } })
     }
   }
   return {
