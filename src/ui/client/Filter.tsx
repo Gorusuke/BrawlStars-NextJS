@@ -12,13 +12,16 @@ const Filters = () => {
   const pathname = usePathname()
   const brawlersType = [ALL, RARITY, CLASS]
   const showFilters = searchParams.get('showFilters')?.toString()
-  const filterBy = searchParams.get('filterBy')?.toString()
+  const filterBy = searchParams.get('filterBy')?.toString() || ALL
 
   const ulrFunctions = () => {
     const params = new URLSearchParams(searchParams) 
     const query = searchParams.get('query')?.toString()
     const handleSearch = (value: string) => {
-      if(value) params.set('query', value)
+      if(value) {
+        params.set('query', value)
+        params.set('page', '1')
+      }
       else params.delete('query')
       replace(`${pathname}?${params.toString()}`)
     }
@@ -43,7 +46,7 @@ const Filters = () => {
   return (
     <section className={styles.filterContainer}>
       <div className={styles.search}>
-        {(filterBy === ALL || filterBy === undefined) &&
+        {filterBy === ALL &&
           <>
             <input
               className={styles.input}
