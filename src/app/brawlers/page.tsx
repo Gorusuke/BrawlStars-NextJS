@@ -3,13 +3,12 @@ import Image from 'next/image'
 import Powers from '@/ui/Powers'
 import { getAllBrawlers } from '@/lib/data'
 import Filters from '@/ui/client/Filter'
-import { filterBrawlers, getPagination } from '@/lib/utils'
+import { createPageURL, filterBrawlers, getPagination } from '@/lib/utils'
 import { ALL, CARDS_PER_PAGE, LEFT_ARROW, NEXT, PREV, RIGHT_ARROW } from '@/lib/constants'
 import BrawlersByType from '@/ui/BrawlerByType'
 import ArrowButtons from '@/ui/ArrowButtons'
 import Pagination from '@/ui/client/Pagination'
 import styles from '@/ui/global.module.css'
-import { headers } from 'next/headers'
 
 const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string | undefined }}) => {
   const { page = 1, query, filterBy = ALL } = searchParams
@@ -20,24 +19,6 @@ const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string |
   const brawlersPagination = brawlersData.slice(prev, next)
   const totalPages = Math.ceil((Number(query) || brawlersData.length) / CARDS_PER_PAGE)
   
-  const createPageURL = (state: string) => {
-    const headersList = headers()
-    const header_url = headersList.get('x-url') || "";
-    const pathname = headersList.get('x-pathname');
-    const params = header_url.split('?')[1] || ''
-    const getParams = params.includes('&') ? params.split('&') : [params]
-    const hoal = getParams.find(pa => pa.includes('page'))
-    const pageNumber = Number(hoal?.at(-1))
-    let newUrl = ''
-    if(state === NEXT){
-      newUrl = params.replace(`page=${pageNumber}`, `page=${pageNumber + 1}`)
-    } else {
-      newUrl = params.replace(`page=${pageNumber}`, `page=${pageNumber - 1}`)
-    }
-    return `${pathname}?${newUrl}`
-  };
-  
-
   return (
     <>
       <Filters />

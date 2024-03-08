@@ -1,3 +1,4 @@
+import { headers } from "next/headers"
 import { CARDS_PER_PAGE, CLASS, FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
 import { getAllBrawlers } from "./data"
 import { AllClasses, AllRarity, BrawlerInterface } from "./definitions/brawler"
@@ -112,3 +113,20 @@ export const getPagination = (prev: number, next: number) => {
   next = prev + CARDS_PER_PAGE
   return { prev, next }
 }
+
+export const createPageURL = (state: string) => {
+  const headersList = headers()
+  const header_url = headersList.get('x-url') || "";
+  const pathname = headersList.get('x-pathname');
+  const params = header_url.split('?')[1] || ''
+  const getParams = params.includes('&') ? params.split('&') : [params]
+  const hoal = getParams.find(pa => pa.includes('page'))
+  const pageNumber = Number(hoal?.at(-1))
+  let newUrl = ''
+  if(state === NEXT){
+    newUrl = params.replace(`page=${pageNumber}`, `page=${pageNumber + 1}`)
+  } else {
+    newUrl = params.replace(`page=${pageNumber}`, `page=${pageNumber - 1}`)
+  }
+  return `${pathname}?${newUrl}`
+};
