@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const BrawlStarsLogo = () => {
   return (
-    <Link href='/brawlers' className='flex items-center text-white cursor-pointer'>
+    <Link href='/' className='flex items-center text-white cursor-pointer'>
       <div style={{width: '50px', height: '50px', marginRight: '10px'}}>
         <svg viewBox="0 0 114 114" xmlns="http://www.w3.org/2000/svg">
           <g>

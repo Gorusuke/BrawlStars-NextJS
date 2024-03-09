@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   const styles = 'my-0 font-semibold text-white hover:text-[#ffe058]'
   const routes = [
-    { name: 'Brawlers', path: '/brawlers'},
+    { name: 'Brawlers', path: '/'},
     { name: 'Maps', path: '/maps'},
     { name: 'Events', path: '/events'},
     { name: 'Game-Modes', path: '/game-modes'}

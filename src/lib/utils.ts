@@ -92,7 +92,6 @@ export const groupByMapsTitle = (data: Maps[]) => {
       mapsName[map.gameMode.name as keyof MapsNamesInterface].push(map)
     }
   })
-  console.log(mapsName)
   return mapsName
 }
 
