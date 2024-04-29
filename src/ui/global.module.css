@@ -268,7 +268,7 @@
 
 .skeletonEventTop {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   padding: 2px 5px;
 }
