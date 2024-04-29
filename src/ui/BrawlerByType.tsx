@@ -1,6 +1,5 @@
 import { AllTypes, BrawlerInterface } from "@/lib/definitions/brawler"
 import { filterByType } from "@/lib/utils"
-import Image from "next/image"
 import Link from "next/link"
 import styles from './global.module.css'
 
@@ -17,14 +16,16 @@ const BrawlersByType = ({ brawlers, filterBy }: { brawlers: BrawlerInterface[], 
             { // @ts-expect-error Property map does not exist on type never.
               result[name as keyof AllTypes].map((brawler) => (
               <Link key={brawler.id} href={`/brawler/${brawler.id}`}>
-                <Image
-                  className="rounded-lg cursor-pointer"
-                  height={100}
-                  width={100}
-                  style={{border: `4px solid ${brawler.rarity.color}`}}
-                  src={brawler.imageUrl2}
-                  alt={brawler.name}
-                />
+                <picture>
+                  <img
+                    className="rounded-lg cursor-pointer"
+                    height={100}
+                    width={100}
+                    style={{border: `4px solid ${brawler.rarity.color}`}}
+                    src={brawler.imageUrl2}
+                    alt={brawler.name}
+                  />
+                </picture>
               </Link>
             ))}
           </div>

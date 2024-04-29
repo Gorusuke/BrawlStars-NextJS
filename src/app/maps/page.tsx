@@ -2,7 +2,6 @@ import { getAllMaps } from "@/lib/data"
 import { MapsNamesInterface } from "@/lib/definitions/maps"
 import { groupByMapsTitle } from "@/lib/utils"
 import { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -24,13 +23,15 @@ const Maps = async () => {
           <div className='flex flex-wrap items-center gap-2'>
             {maps[mapName as keyof MapsNamesInterface].map(map => (
               <Link href={`/maps/${map.id}`} key={map.id}>
-                <Image
-                  className="h-auto cursor-pointer object-contain"
-                  width={150}
-                  height={150}
-                  src={map.imageUrl} 
-                  alt={map.name} 
-                />
+                <picture>
+                  <img 
+                    className="h-auto cursor-pointer object-contain"
+                    width={150}
+                    height={150}
+                    src={map.imageUrl} 
+                    alt={map.name}
+                  />
+                </picture>
               </Link>
             ))}
           </div>

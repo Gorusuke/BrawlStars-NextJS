@@ -2,7 +2,6 @@ import { getMap } from "@/lib/data"
 import BrawlStats from "@/ui/BrawlStats"
 import Tooltip from "@/ui/Tooltip"
 import { Metadata } from "next";
-import Image from "next/image"
 
 export async function generateMetadata({ params }: {params: { id: string }}): Promise<Metadata> {
   const { id } = params
@@ -23,21 +22,25 @@ const Map = async ({params}: { params: { id: string }}) => {
       {Boolean(Object.values(map).length) &&
         <section className='max-w-max mx-auto my-0 py-8 px-0'>
           <div className='flex flex-col rounded-xl p-4 gap-5' style={{ backgroundColor: map.gameMode.bgColor }}>
-            <Image
-              height={0}
-              width={0}
-              sizes="100vw"
-              className='w-full max-w-[500px] h-auto p-0'
-              src={map.imageUrl} alt={map.name}
-            />
-            <div className='flex gap-3 font-medium'>
-              <Image
-                height={50}
-                width={50}
-                className="mt-3 object-contain"
-                src={map.gameMode.imageUrl} 
-                alt={map.gameMode.name} 
+            <picture>
+              <img
+                height={0}
+                width={0}
+                sizes="100vw"
+                className='w-full max-w-[500px] h-auto p-0'
+                src={map.imageUrl} alt={map.name}
               />
+            </picture>
+            <div className='flex gap-3 font-medium'>
+              <picture>
+                <img
+                  height={50}
+                  width={50}
+                  className="mt-3 object-contain"
+                  src={map.gameMode.imageUrl} 
+                  alt={map.gameMode.name} 
+                />
+              </picture>
               <div className='max-w-[440px]'>
                 <h2>{map.gameMode.name}</h2>
                 <span className='mt-1 bg-black px-2 py-1 rounded-md flex items-center gap-1'>

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import Powers from '@/ui/Powers'
 import { getAllBrawlers } from '@/lib/data'
 import Filters from '@/ui/client/Filter'
@@ -36,14 +35,13 @@ const Brawlers = async ({searchParams}: {searchParams: { [key: string]: string |
             >
               <Link href={`/brawler/${brawler.id}`}>
                 <section className="bg-white text-black flex gap-4 rounded-lg">
-                  <Image
-                    className="h-44 w-auto rounded-[7px_0_0_7px]"
-                    height={0}
-                    width={0}
-                    sizes='100vw'
-                    src={brawler.imageUrl2}
-                    alt={brawler.name}
-                  />
+                  <picture style={{width: "100%"}}>
+                    <img
+                      className="w-44 rounded-[7px_0_0_7px]"
+                      src={brawler.imageUrl2}
+                      alt={brawler.name}
+                    />
+                  </picture>
                   <div className="h-max text-center w-full">
                     <h3 className='my-3 mx-0 font-bold text-xl'>{brawler.name}</h3>
                     <span className='block font-semibold text-[#444] text-md'>{brawler.class.name}</span>

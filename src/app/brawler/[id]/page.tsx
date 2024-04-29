@@ -3,8 +3,7 @@ import { getBrawlerById } from "@/lib/data"
 import { cutText, linkRouter } from "@/lib/utils"
 import ArrowButtons from "@/ui/ArrowButtons"
 import Powers from "@/ui/Powers"
-import { Metadata, ResolvingMetadata } from "next"
-import Image from "next/image"
+import { Metadata } from "next"
 import Link from "next/link"
  
 export async function generateMetadata({ params }: {params: { id: string }}): Promise<Metadata> {
@@ -34,15 +33,14 @@ const Brawler = async ({ params }: { params: { id: string }}) => {
           </div>
           <div className="bg-white grid grid-cols-[minmax(calc(360px_-_32px),_750px)] h-min rounded-2xl text-center">
             <section className="grid grid-cols-[2fr_2.5fr] gap-4 relative">
-              <Image
-                className="h-80 w-80 rounded-[16px_0_0_16px] z-10"
-                height={0}
-                width={0}
-                sizes='100vw'
-                src={brawler.imageUrl2}
-                alt={brawler.name}
-                style={{border: `10px solid ${brawler.rarity.color}`}}
-              />
+              <picture>
+                <img
+                  className="h-80 w-80 rounded-[16px_0_0_16px] z-10"
+                  src={brawler.imageUrl2}
+                  alt={brawler.name}
+                  style={{border: `10px solid ${brawler.rarity.color}`}}
+                />
+              </picture>
               <div className="text-black pr-4 flex flex-col gap-4">
                 <h2 className="mt-4 text-2xl font-semibold">{brawler.name}</h2>
                 <span className='font-normal block text-sm'>{cutText(brawler.description)}</span>

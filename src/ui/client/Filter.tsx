@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { CLASS, RARITY, ALL } from "@/lib/constants";
 import ArrowButtons from "../ArrowButtons";
@@ -55,7 +54,9 @@ const Filters = () => {
               type="text"
               defaultValue={searchParams.get('query')?.toString()}
             />
-            <Image className={styles.icon} src='/search.svg' alt="search" width={20} height={0} />
+            <picture>
+              <img className={styles.icon} src='/search.svg' alt="search" width={20} height={0} />
+            </picture>
           </>
         }
       </div>
