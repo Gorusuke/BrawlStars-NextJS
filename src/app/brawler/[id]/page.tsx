@@ -1,5 +1,5 @@
 import { BUTTONS_ARR } from "@/lib/constants"
-import { getBrawlerById } from "@/lib/data"
+import { getAllBrawlers, getBrawlerById } from "@/lib/data"
 import { cutText, linkRouter } from "@/lib/utils"
 import ArrowButtons from "@/ui/ArrowButtons"
 import Powers from "@/ui/Powers"
@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: {params: { id: string }}): Pr
 const Brawler = async ({ params }: { params: { id: string }}) => {
   const { id } = params
   const brawler = await getBrawlerById(id)
+  const allBrawlersLength = (await getAllBrawlers()).length
 
   return (
     <>
@@ -26,7 +27,7 @@ const Brawler = async ({ params }: { params: { id: string }}) => {
         <div className="grid p-4 min-h-[55vh] place-content-center">
           <div className="flex justify-between mb-5">
             {BUTTONS_ARR.map(button => 
-              <Link href={linkRouter(button.step, id)} key={button.text}>
+              <Link href={linkRouter(button.step, id, allBrawlersLength)} key={button.text}>
                 <ArrowButtons text={button.text} path={button.path} isUp={button.isUp} />
               </Link>
             )}

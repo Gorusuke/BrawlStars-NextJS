@@ -12,8 +12,8 @@ export const cutText = (text: string) => {
   return text
 }
 
-export const linkRouter = (step: string, newId: string) => {
-  const lastBrawler = (Number(LAST_BRAWLER_ID)).toString()
+export const linkRouter = (step: string, newId: string, length: number) => {
+  const lastBrawler = `160000${length + 1}`.toString()
   const firstBrawler = (Number(FIRST_BRAWLER_ID)).toString()
   if (step === PREV) {
     if (newId === firstBrawler) return `/brawler/${LAST_BRAWLER_ID}`
