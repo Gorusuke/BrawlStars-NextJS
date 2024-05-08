@@ -5,7 +5,6 @@ export const ALL = 'All'
 export const PREV = 'prev'
 export const NEXT = 'next'
 export const FIRST_BRAWLER_ID = '16000000'
-export const LAST_BRAWLER_ID = '16000079'
 export const UPCOMING = 'upcoming'
 export const CARDS_PER_PAGE = 12
 export const LEFT_ARROW = "M21 12L3 12M3 12L11.5 3.5M3 12L11.5 20.5"

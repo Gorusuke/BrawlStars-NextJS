@@ -1,5 +1,5 @@
 import { headers } from "next/headers"
-import { CARDS_PER_PAGE, CLASS, FIRST_BRAWLER_ID, LAST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
+import { CARDS_PER_PAGE, CLASS, FIRST_BRAWLER_ID, NEXT, PREV, RARITY } from "./constants"
 import { getAllBrawlers } from "./data"
 import { AllClasses, AllRarity, BrawlerInterface } from "./definitions/brawler"
 import { Maps, MapsNamesInterface, Stat } from "./definitions/maps"
@@ -16,10 +16,10 @@ export const linkRouter = (step: string, newId: string, length: number) => {
   const lastBrawler = `160000${length + 1}`.toString()
   const firstBrawler = (Number(FIRST_BRAWLER_ID)).toString()
   if (step === PREV) {
-    if (newId === firstBrawler) return `/brawler/${LAST_BRAWLER_ID}`
+    if (newId === firstBrawler) return `/brawler/${lastBrawler}`
     return `/brawler/${Number(newId) - 1}`
   } else if (step === NEXT) {
-    if (newId === lastBrawler) return `/brawler/${FIRST_BRAWLER_ID}`
+    if (newId === lastBrawler) return `/brawler/${firstBrawler}`
     return `/brawler/${Number(newId) + 1}`
   }
   return ''
